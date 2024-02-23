@@ -1,20 +1,15 @@
 import os
+import sys
 
-
-
-def list_files_in_path(path):
-    file_list = []
+files = []
+if len(sys.argv) < 2:
+    print("No files provided. Drag and drop files onto the batch file.")
+else:
     
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            file_list.append(file_path)
+    for arg in sys.argv[1:]:
+        files.append(arg)
+        
 
-    return file_list
-
-def list_folders_in_path(path=os.getcwd()):
-    folder_list = [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
-    return folder_list
 
 
 
@@ -85,16 +80,14 @@ if M.upper() == 'E':
     print("------ ENCRYPTION -------")
     done = False
     while not done:
-        folderList = list_folders_in_path()
         a = 0
 
-        for element in folderList:
+        for element in files:
             a += 1
             print(a, element)
-        filename = int(input('File: '))
         key = input('Key: ')
         kString = string_to_int_array(key)
-        fileList = list_files_in_path(folderList[filename-1])
+        fileList = files
         
         for element in fileList:
             element.replace("\\","/")
@@ -111,7 +104,7 @@ if M.upper() == 'D':
     print("------ Decryption -------")
     done = False
     while not done:
-        folderList = list_folders_in_path()
+        folderList = files
 
         a = 0
         for element in folderList:
@@ -119,14 +112,13 @@ if M.upper() == 'D':
             print(a, element)
         
         
-        filename = int(input('File: '))
         key = input('Key: ')
         kString = string_to_int_array(key)
-        fileList = list_files_in_path(folderList[filename-1])
+        fileList = files
         for filename in fileList:
             try:
                 decrypt(filename,kString)
-                print('Success, exiting...')
+                print('decrypting...')
                 done = True
             except:
                 done = False
