@@ -98,7 +98,7 @@ if M.upper() == 'E':
                 done = True
             except:
                 done = False
-                print("File or Key unvalid, please retry")
+                print("File or Key invalid, please retry")
 if M.upper() == 'D':
     print()
     print("------ Decryption -------")
@@ -122,4 +122,4 @@ if M.upper() == 'D':
                 done = True
             except:
                 done = False
-                print("File or Key unvalid, please retry")
+                print("File or Key invalid, please retry")
